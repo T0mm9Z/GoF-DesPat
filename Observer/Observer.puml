@@ -1,0 +1,73 @@
+@startuml
+
+abstract class Subject <<interface>>
+{
+    vector<Observer*> observers;
+    registerObserver(observer)
+    removeObserver(observer)
+    notifyObservers()
+}
+
+
+abstract class Observer <<interface>>
+{
+    update()
+}
+
+class ConcreteSubject
+{
+    registerObserver(){...}
+    removeObserver(){...}
+    notifyObserver(){...}
+    
+    getState()
+    setState()   
+}
+
+class ConcreteObserver
+{
+    update()
+    //other observer \nspecific methods
+}
+
+Subject <|.. ConcreteSubject
+Observer <|.. ConcreteObserver
+Subject -right-> "observers" Observer
+ConcreteSubject <-right- ConcreteObserver
+
+note left of Subject
+Notify for all o in observers
+{
+    o->Update()
+} 
+
+
+Here's the Subject interface.
+Objects use this interface to register
+as observers and also to remove themselves
+from being observers.
+end note
+
+note bottom of ConcreteObserver
+Concrete observers cna be any class
+that implements the Observers interface.
+Each observer registers with a concrete 
+subject to receive updates.
+
+end note
+
+note left of ConcreteSubject
+A concrete subject always implements
+the subject interface. In addition to
+the register and remove methods, the
+concrete subject implementes a notifyObservers()
+method that is used to pudate all the current
+observers whenever state changes
+end note
+
+note bottom of ConcreteSubject
+The concrete subject may also have methods
+for setting and getting its state
+end note
+
+@enduml
