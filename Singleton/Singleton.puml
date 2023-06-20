@@ -1,0 +1,16 @@
+@startuml
+class Singleton
+{
+    +static Instance()
+    +SingletonOperation()
+    +GetSingletonData()
+
+    -static uniqueInstance
+    -singletonData
+    
+}
+
+note left of Singleton
+ return uniqueInstance
+end note
+@enduml
