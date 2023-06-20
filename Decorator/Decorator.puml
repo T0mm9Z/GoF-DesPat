@@ -1,0 +1,48 @@
+@startuml
+
+abstract class Component
+{
+     Operation()
+}
+
+abstract class Decorator
+{
+     Operation()
+}
+
+class ConcreteComponent
+{
+    Operation()
+}
+
+
+class ConcreteDecoratorA
+{
+     Operation()
+     AddedState
+}
+
+class ConcreteDecoratorB
+{
+     Operation()
+     AddedBehavior()
+}
+
+
+Component <|-- ConcreteComponent
+Component <|--down Decorator
+Component <--o Decorator
+
+Decorator <|-- ConcreteDecoratorA
+Decorator <|-- ConcreteDecoratorB
+
+note right of Decorator
+component->Operation()
+end note
+
+note left of ConcreteDecoratorB
+Decorator::Operation();
+AddedBehavior();
+end note
+
+@enduml
